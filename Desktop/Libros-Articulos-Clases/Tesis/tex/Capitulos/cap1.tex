@@ -1,0 +1,129 @@
+\chapter{Introducción}
+\begin{flushright}
+\textit{``Matchmaker, matchmaker,
+Make me a match, Find me a find,
+Catch me a catch''}
+\end{flushright}
+\section{El problema de admisión a universidades}
+Descripción del problema
+
+
+
+\begin{dfn}{(Gale Shapley 1962)}
+\label{Estable}
+Decimos que una asignación de solicitantes a universidades es inestable si existen dos solicitantes $\alpha$ y $\beta$ asignados a  universidades $A$ y $B$ respectivamente, con la propiedad de que $\alpha$ prefiere estar en $B$ que en $A$ y $B$ prefiere tener a $\alpha$ que a $B$. Es decir, existen una universidad y un solicitante que se prefieren entre ellos a sus respectivas asignaciones. Alternativamente una asignación de solicitantes a universidades es estable si no es inestable.
+\end{dfn}
+
+\begin{dfn}{(Gale Shapley 1962)}
+\label{optima}
+Una asignación es considera optima si cada solicitante esta mejor o igual respecto a sus preferencias que en cualquier otra asignación estable. 
+\end{dfn}
+
+
+
+%DEscripcion
+%Definiciones
+%Chane esto jala mejor como capitulo y no seccion
+%COmentario que explique como abajo es caso particular
+
+\section{El problema del matrimonio estable}
+\begin{flushright}
+\textit{``Even the worst husband, God forbid, is better than no husband, God forbid.''}
+\end{flushright}
+%Definicion del problema
+%Definiciones alternativas
+\begin{dfn}
+Definimos la matriz de preferencias para un problema con $n$ y con $m$ mujeres como una matriz con $n$ filas y $m$ columnas donde donde la primera entrada de la celda $(i,j)$ represente el orden de preferencia que le asigna el hombre $i$ a la mujer $j$ y análogamente la segunda entrada representa el orden de preferencia que le da la mujer $j$ al hombre $i$.
+\end{dfn}
+\begin{eje}
+\label{ejemplo matrimonio 1}
+Supongamos que contamos con tres hombres $\alpha$, $\beta$ y $\gamma$ y con tres mujeres $A$, $B$ y $C$ y la matriz de preferencias
+$$\begin{pmatrix}
+& A & B & C \\
+\alpha & 1,3 & 2,2 & 3,1 \\
+\beta & 3,1 & 1,3 & 2,2 \\
+\gamma & 2,2 & 3,1 & 1,3 
+\end{pmatrix}$$
+aquí por ejemplo el orden preferencias de $\alpha$ es $(A,B,C)$ y el orden de preferencias de $C$ es $(\gamma, \beta, \alpha)$.
+\end{eje}
+
+\begin{dfn}
+Análogo a la definición \ref{Estable},
+decimos que un conjunto de matrimonios es inestable si existe un hombre y una mujer que se prefieren entre si a sus respectivas parejas. Alternativamente un conjunto de matrimonios es estable si no es inestable. 
+\end{dfn}
+
+%Ejemplos
+\begin{eje}
+Retomando el ejemplo \ref{ejemplo matrimonio 1}. \\
+El conjunto de parejas $(\alpha, A), \; (\beta, B)\; y\; (\gamma, C)$ es estable porque a pesar de las preferencias de las mujeres cada hombre esta con su primera opción, es decir, los hombres prefieren a su pareja a cualquier otra mujer.\\ 
+
+\end{eje}
+\begin{eje}
+Retomando el ejemplo \ref{ejemplo matrimonio 1}. \\
+El conjunto de parejas $(\alpha, A)$, $(\gamma, B)$ y $(\beta, C)$ es inestable porque $\gamma$ prefiere a $A$ que a su pareja actual ($B$) y A prefiere a $\gamma$ que a su pareja actual $(\alpha)$.
+\end{eje}
+\subsection{Algoritmo de Gale Shapley}
+\begin{eje}
+Ejemplo de 4x4
+\end{eje}
+
+\begin{teo}[Teorema de Gale Shaley]
+\label{teorema de Gale Shapley}
+El algoritmo de Gale Shapley termina en una emparejamiento estable.
+\end{teo}
+\begin{proof}
+
+\end{proof}
+
+\begin{lem}
+\label{lema 1}
+Bajo el emparejamiento obtenido por Gale Shapley, solo un hombre puede terminar con la última mujer de su lista como pareja. 
+\end{lem}
+
+\begin{proof}
+Supongamos que en el emparejamiento de Gale Shapley $m$ ($m\geq2$) hombres terminan con la última mujer de su lista como pareja, eso significa que cada uno de esos $m$ hombres invito a salir a todas las mujeres. Entonces cada mujer fue invita a salir por lo menos $m$ veces, lo cual es una contradicción porque el algoritmo acaba cuando invitan a salir a la última mujer y a esta solo la invitan a salir una vez. Por lo tanto, solo un hombre puede terminar con la última mujer de su lista como pareja. 
+\end{proof}
+
+\begin{cor}
+Si en un emparejamiento estable por lo menos dos hombres están emparejados con la última mujer de sus respectivas listas, entonces existe dos o más emparejamientos estables en el problema.
+\end{cor}
+
+\begin{proof}
+Llamemos $m$ al emparejamiento estable donde por lo menos dos hombres están emparejados con la última mujer de sus respectivas listas y llamemos $m'$ al emparejamiento de Gale Shapley.
+Por el teorema \ref{teorema de Gale Shapley} sabemos que el algoritmo de Gale Shapley siempre acaba en un emparejamiento estable y además en ese emparejamiento estable solo un hombre puede terminar con la última mujer de su lista como pareja por el lema \ref{lema 1}.
+Por lo tanto $m$ y $m'$ son diferentes y como ambos son emparejamientos estables entonces el número de emparejamientos estables en el problema es mayor o igual a dos. 
+\end{proof}
+
+\begin{cor}
+El número máximo de propuestas en el algoritmo es $n^2-n+1$
+\end{cor}
+
+\begin{proof}
+Por el lema \ref{lema 1} sabemos que a lo más un hombre acaba emparejado con la última mujer de su lista, por lo tanto el peor emparejamiento posible para el algoritmo es uno donde $n-1$ hombres terminan con la penúltima mujer de sus respectivas listas y un hombre termina con la última. Para llegar a esta situación de acuerdo al algoritmo, los $n-1$ hombres deben de realizar $n-1$ propuestas cada uno y el otro hombre debe de realizar $n$ propuestas. Esto es $(n-1)(n-1)+n$ propuestas que es igual a $n^2-n+1$ propuestas.
+\end{proof}
+
+\begin{obs}
+La complejidad del algoritmo de Gale Shapley es del orden de $n^2$.
+\end{obs}
+
+\begin{eje}
+Aquí va el ejemplo de 2x2 del lema
+Considere la matriz de preferencias 
+$$\begin{pmatrix}
+&A&B\\
+\alpha &1,1& 2,1 \\
+\beta & 1,2 & 2,2
+\end{pmatrix}$$
+\end{eje}
+
+\begin{eje}
+Aquí va el ejemplo de 3x3 del lema
+\\ Considere la matriz de preferencias $$\begin{pmatrix}
+& A & B & C \\
+\alpha & 1,2 & 3,2 & 2,1 \\
+\beta & 2,3 & 3,1 & 1,2 \\
+\gamma & 2,1 & 3,3 & 1,3 
+\end{pmatrix}$$
+\end{eje}
+
+

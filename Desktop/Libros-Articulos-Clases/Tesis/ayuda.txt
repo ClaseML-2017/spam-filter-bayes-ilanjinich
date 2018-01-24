@@ -1,0 +1,2 @@
+cd C:\Users\ilan\Desktop\Libros-Articulos-Clases\Tesis\tex
+pdflatex main.tex
